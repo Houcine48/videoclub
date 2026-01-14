@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Mes locations</title>
+</head>
+<body>
+    <h1>Mes Films Loues</h1>
+    <a href="/">Retour a l'accueil</a>
+    <hr>
+
+    {% for rental in rentals %}
+        <div style="border: 1px solid blue; margin: 10px; padding: 10px;">
+            <!-- On affiche le titre du film -->
+            <h3>{{ rental.movie.title }}</h3>
+            
+            <!-- On affiche la date -->
+            <p>Loue le : {{ rental.rental_date }}</p>
+        </div>
+    {% empty %}
+        <p>Vous n'avez pas encore loue de films.</p>
+    {% endfor %}
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Connexion</title>
+</head>
+<body>
+    <h1>Se connecter</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        <!-- Formulaire de login simple -->
+        <p>Nom : <input type="text" name="username"></p>
+        <p>Mot de passe : <input type="password" name="password"></p>
+        
+        <button type="submit">Entrer</button>
+    </form>
+    
+    <p>Pas de compte ? <a href="{% url 'register' %}">Creer un compte</a></p>
+</body>
+</html>

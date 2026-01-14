@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Ma Liste de Souhaits</title>
+</head>
+<body>
+    <h1>Films a voir plus tard</h1>
+    <a href="/">Retour a l'accueil</a>
+    <hr>
+
+    {% for item in wishes %}
+        <div style="border: 1px solid pink; margin: 10px; padding: 10px;">
+            <h3>{{ item.movie.title }}</h3>
+            <p>{{ item.movie.description }}</p>
+            <!-- Lien pour aller louer le film directement -->
+            <a href="{% url 'detail' item.movie.id %}">Aller a la fiche du film</a>
+        </div>
+    {% empty %}
+        <p>Votre liste est vide.</p>
+    {% endfor %}
+</body>
+</html>

@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Mon Video Club</title>
+</head>
+<body>
+    <!-- MENU DU HAUT -->
+    <div style="background-color: #eee; padding: 10px; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            <!-- Si connecte -->
+            <span>Bonjour {{ user.username }} !</span>
+            
+            <!-- LIENS PERSONNELS -->
+            <a href="{% url 'my_rentals' %}" style="margin-left: 10px; color: blue;">[Mes Locations]</a>
+            <a href="{% url 'my_wishlist' %}" style="margin-left: 5px; color: purple;">[Mes Souhaits]</a>
+            
+            <!-- Bouton Deconnexion -->
+            <form action="{% url 'logout' %}" method="post" style="display:inline; margin-left: 10px;">
+                {% csrf_token %}
+                <button type="submit">Se deconnecter</button>
+            </form>
+        {% else %}
+            <!-- Si visiteur -->
+            <a href="{% url 'login' %}">Se connecter</a> | 
+            <a href="{% url 'register' %}">Creer un compte</a>
+        {% endif %}
+    </div>
+
+    <h1>Bienvenue au Video Club</h1>
+
+    <!-- BARRE DE RECHERCHE -->
+    <div style="margin: 20px;">
+        <form method="get">
+            <input type="text" name="search" placeholder="Rechercher un film..." style="padding: 10px; width: 300px;">
+            <button type="submit" style="padding: 10px;">Rechercher</button>
+            <a href="/"> <button type="button" style="padding: 10px;">Tout voir</button> </a>
+        </form>
+    </div>
+    <hr>
+    
+    <!-- LISTE DES FILMS -->
+    {% for movie in movies %}
+        <div style="border: 1px solid black; padding: 10px; margin: 10px;">
+            <h2>
+                <a href="{% url 'detail' movie.id %}">{{ movie.title }}</a>
+            </h2>
+            <p>{{ movie.description }}</p>
+            <p><strong>Prix : {{ movie.price }} EUR</strong></p>
+        </div>
+    {% empty %}
+        <!-- Si la recherche ne donne rien -->
+        <p>Aucun film trouve avec ce nom.</p>
+    {% endfor %}
+
+</body>
+</html>
